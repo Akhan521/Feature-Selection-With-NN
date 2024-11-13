@@ -9,3 +9,4 @@ num_features = 4
 
 # Running the forward selection algorithm.
 max_score, best_subset = forward_selection(num_features)
+

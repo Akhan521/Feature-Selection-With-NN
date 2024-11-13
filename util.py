@@ -12,7 +12,10 @@ def powerset(features):
     if not features:
         return [[]]
     # Otherwise, iterate over all subsets.
-    subsets = [[]] + [features[i:j] for i in range(len(features)) for j in range(i + 1, len(features) + 1)]
+    subsets = [[]]
+    for i in range(len(features)):
+        for j in range(len(subsets)):
+            subsets.append(subsets[j] + [features[i]])
     # Sorting the subsets by length.
     subsets = sorted(subsets, key=len)
     # Return the powerset.
