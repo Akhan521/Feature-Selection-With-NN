@@ -1,4 +1,5 @@
 
+import time
 import numpy as np
 
 # Our validator class.
@@ -30,10 +31,16 @@ class Validator:
         N = self.dataset.shape[0]
         # Our validation data sample.
         validation_sample = None
+        # Our total running time.
+        total_time = 0
         # Our Leave-One-Out loop:
         for i in range(N):
+            #print(f'Leave-One-Out Iteration {i+1}')
+            #print('---------------------------------')
+            start = time.time()
             # We'll first set aside the validation sample.
             validation_sample = self.dataset[i]
+            #print(f'Validation sample: {validation_sample}')
             # We'll use the remaining samples to train our classifier.
             selected_samples = [s for s in range(N) if s != i]
             self.classifier.train(self.dataset[selected_samples, :])
@@ -42,6 +49,11 @@ class Validator:
             # If our predicted label matches the true label, we'll increment our correct classifications.
             if predicted_label == validation_sample[0]:
                 correct_classifications += 1
+            end = time.time()
+            #print(f'\tIteration {i+1} took {end - start:.6f} seconds to execute.')
+            total_time += end - start
+            #print()
         # Computing our accuracy and returning it.
+        print(f'Total time taken for Leave-One-Out Validation: {total_time:.2f} seconds')
         accuracy = correct_classifications / N
         return accuracy

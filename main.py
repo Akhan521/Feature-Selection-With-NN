@@ -22,15 +22,23 @@ classifier = Classifier()
 
 # Our validator for the small dataset.
 validator_small_dataset = Validator(small_feature_subset, classifier, small_dataset)
+
+# Evaluating our classifier on the small dataset.
+print('Evaluating our classifier on the small dataset:')
+print('----------------------------------------------')
+accuracy_small_dataset = validator_small_dataset.evaluate()
+print(f'Accuracy on the small dataset: {accuracy_small_dataset*100:.2f}%\n')
+
 # Our validator for the large dataset.
 validator_large_dataset = Validator(large_feature_subset, classifier, large_dataset)
 
-# Evaluating our classifier on both datasets.
-accuracy_small_dataset = validator_small_dataset.evaluate()
+# Evaluating our classifier on the large dataset.
+print('Evaluating our classifier on the large dataset:')
+print('----------------------------------------------')
 accuracy_large_dataset = validator_large_dataset.evaluate()
+print(f'Accuracy on the large dataset: {accuracy_large_dataset*100:.2f}%\n')
 
-# Printing the accuracies of our classifier on both datasets.
-print(f'Accuracy on the small dataset: {accuracy_small_dataset:.2f}')
-print(f'Accuracy on the large dataset: {accuracy_large_dataset:.2f}\n')
+
+
 
 
