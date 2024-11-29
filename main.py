@@ -1,26 +1,36 @@
-# main.py
 
-# Importing our utility functions and search functions.
-from util import *
+# Our imports.
+import numpy as np
+from Validator import Validator
+from Classifier import Classifier
 from forward_selection import forward_selection
 from backward_elimination import backward_elimination
 
-print('\nWelcome to Aamir Khan\'s Feature Selection Algorithm:')
+print('\nWelcome to Aamir Khan\'s 1NN-Classifier Program:')
 print('-----------------------------------------------------\n')
 
+# Loading our text files into python using numpy (From numpy documentation).
+small_dataset = np.loadtxt('datasets/small-test-dataset.txt')
+large_dataset = np.loadtxt('datasets/large-test-dataset.txt')
 
-# Setting the number of features we're considering.
-num_features = int(input('Enter the number of features you\'d like to consider: '))
+# Our feature subsets of choice: [3, 5, 7] and [1, 15, 27] for small and large datasets, respectively.
+small_feature_subset = [3, 5, 7]
+large_feature_subset = [1, 15, 27]
 
-print('''\nSelect the algorithm you\'d like to run:\n
-      1. Forward Selection\n
-      2. Backward Elimination
-      ''')
-choice = input('Enter your choice: ')
+# Our classifier - 1NN classifier.
+classifier = Classifier()
 
-if choice == '1':
-    # Running the forward selection algorithm.
-    max_score, best_subset = forward_selection(num_features)
-else:
-    # Running the backward elimination algorithm.
-    max_score, best_subset = backward_elimination(num_features)
+# Our validator for the small dataset.
+validator_small_dataset = Validator(small_feature_subset, classifier, small_dataset)
+# Our validator for the large dataset.
+validator_large_dataset = Validator(large_feature_subset, classifier, large_dataset)
+
+# Evaluating our classifier on both datasets.
+accuracy_small_dataset = validator_small_dataset.evaluate()
+accuracy_large_dataset = validator_large_dataset.evaluate()
+
+# Printing the accuracies of our classifier on both datasets.
+print(f'Accuracy on the small dataset: {accuracy_small_dataset:.2f}')
+print(f'Accuracy on the large dataset: {accuracy_large_dataset:.2f}\n')
+
+

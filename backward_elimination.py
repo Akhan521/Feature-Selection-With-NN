@@ -1,5 +1,4 @@
-# Importing our utility functions.
-from util import *
+import numpy as np
 
 '''
 Defining our backward elimination function:
@@ -16,10 +15,10 @@ def backward_elimination(num_features):
     best_subset = None                                 # The best subset of features.
     current_best_subset = features                     # The current best subset for the given iteration.
 
+    # Intializing our best score:
+    max_score = np.random.rand()
     # Using all features, we'll evaluate the accuracy.
-    print(f"\nUsing all features and random evaluation, I get an accuracy of {evaluate(current_best_subset)*100:.2f}%")
-    # Updating our best score:
-    max_score = evaluate(current_best_subset)
+    print(f"\nUsing all features and random evaluation, I get an accuracy of {max_score*100:.2f}%")
     print('\nBeginning search.\n')
     # Now, we'll greedily remove features from our current best subset.
     while(len(features) > 0):
@@ -32,7 +31,7 @@ def backward_elimination(num_features):
         # Iterating over all features:
         for feature in features:
             current_subset = [f for f in starting_point if f != feature]
-            current_score = evaluate(current_subset)
+            current_score = np.random.rand()
             if current_subset == []:
                 print(f"\tUsing no features, accuracy is {current_score*100:.2f}%")
             else:

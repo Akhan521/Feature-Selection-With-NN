@@ -1,5 +1,4 @@
-# Importing our utility functions.
-from util import *
+import numpy as np
 
 '''
 Defining our forward selection function:
@@ -15,10 +14,10 @@ def forward_selection(num_features):
     best_subset = None                                 # The best subset of features.
     current_best_subset = []                           # The current best subset for the given iteration.
 
+    # Intializing our best score:
+    max_score = np.random.rand()
     # Using no features, we'll evaluate the accuracy.
-    print(f"\nUsing no features and random evaluation, I get an accuracy of {evaluate(current_best_subset)*100:.2f}%")
-    # Updating our best score:
-    max_score = evaluate(current_best_subset)
+    print(f"\nUsing no features and random evaluation, I get an accuracy of {max_score*100:.2f}%")
     print('\nBeginning search.\n')
     # Now, we'll greedily add features to our current best subset.
     while(len(features) > 0):
@@ -32,7 +31,7 @@ def forward_selection(num_features):
         for feature in features:
             # Adding the current feature to our starting point.
             current_subset = starting_point + [feature]
-            current_score = evaluate(current_subset)
+            current_score = np.random.rand()
             print(f"\tUsing feature(s) {current_subset}, accuracy is {current_score*100:.2f}%")
             # If the current score is the best, we'll update the best subset and max score.
             if current_score > max_score:
