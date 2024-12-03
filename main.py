@@ -5,6 +5,26 @@ from Validator import Validator
 from Classifier import Classifier
 from forward_selection import forward_selection
 from backward_elimination import backward_elimination
+import matplotlib.pyplot as plt
+
+'''
+
+    Group: Aamir Khan - akhan197 - Session 1
+    Datasets: Small, Large, Titanic
+
+    Results (Best Feature Subset & Accuracy):
+
+        1. Small Dataset:
+            - Forward Selection:    [5,3] w/ 92% accuracy.
+            - Backward Elimination: [3,5] w/ 92% accuracy.
+        2. Large Dataset:
+            - Forward Selection:    [27,1] w/ 95.5% accuracy.
+            - Backward Elimination: [27]   w/ 84.7% accuracy.
+        3. Titanic Dataset:
+            - Forward Selection:    [2] w/ 78.01% accuracy.
+            - Backward Elimination: [2] w/ 78.01% accuracy.
+
+'''
 
 print('\nWelcome to Aamir Khan\'s 1NN-Classifier Program:')
 print('-----------------------------------------------------\n')
@@ -44,7 +64,6 @@ if choice == 1:
 else:
     # Using backward elimination on the dataset.
     _, feature_subset = backward_elimination(dataset.shape[1] - 1, dataset)
-
 
 
 

@@ -25,9 +25,9 @@ def forward_selection(num_features, dataset):
     start = time.time()
     max_score = validator.evaluate()
     # Using no features, we'll evaluate the accuracy.
-    # print(f'Running NN w/ no features & Leave-One-Out validation, I get an accuracy of {max_score*100:.2f}%')
-    # print('\nBeginning search:')
-    # print('-------------------\n')
+    print(f'Running NN w/ no features & Leave-One-Out validation, I get an accuracy of {max_score*100:.2f}%')
+    print('\nBeginning search:')
+    print('-------------------\n')
     # Now, we'll greedily add features to our current best subset.
     while(len(features) > 0):
         current_best_score = 0 # The current best score for the given iteration.
@@ -44,7 +44,7 @@ def forward_selection(num_features, dataset):
             validator = Validator(current_subset, classifier, dataset)
             # Evaluating the current subset.
             current_score = validator.evaluate()
-            # print(f"\tUsing feature(s) {current_subset}, accuracy is {current_score*100:.2f}%")
+            print(f"\tUsing feature(s) {current_subset}, accuracy is {current_score*100:.2f}%")
             # If the current score is the best, we'll update the best subset and max score.
             if current_score > max_score:
                 max_score = current_score
@@ -56,20 +56,19 @@ def forward_selection(num_features, dataset):
                 feature_to_remove = feature
 
         # Outputting our best subsets and scores after the current iteration.
-        # if current_best_subset == []:
-        #     print(f'\nUsing no features is the current best, accuracy is {current_best_score*100:.2f}%')
-        # else:
-        #     print(f'\nFeature set {current_best_subset} is the current best, accuracy is {current_best_score*100:.2f}%')
-        # if best_subset == []:
-        #     print(f'Using no features is the overall best, accuracy is {max_score*100:.2f}%\n')
-        # else:
-        #     print(f"Feature set {best_subset} is the overall best, accuracy is {max_score*100:.2f}%\n")
+        if current_best_subset == []:
+            print(f'\nUsing no features is the current best, accuracy is {current_best_score*100:.2f}%')
+        else:
+            print(f'\nFeature set {current_best_subset} is the current best, accuracy is {current_best_score*100:.2f}%')
+        if best_subset == []:
+            print(f'Using no features is the overall best, accuracy is {max_score*100:.2f}%\n')
+        else:
+            print(f"Feature set {best_subset} is the overall best, accuracy is {max_score*100:.2f}%\n")
         # Updating our starting point for the next iteration.
         starting_point = current_best_subset
         # Removing the feature we've chosen from our list of features.
         features.remove(feature_to_remove)
-    end = time.time()
-    print(f'total time {end - start:.2f}')
-    # print('-' * 85)
+    print('-' * 85)
+    print(f'Total time = {time.time() - start:.2f} seconds')
     print(f'Finished search! The best feature subset is {best_subset}, which has an accuracy of {max_score*100:.2f}%\n')
     return max_score, best_subset
