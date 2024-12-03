@@ -12,31 +12,38 @@ print('-----------------------------------------------------\n')
 # Loading our text files into python using numpy (From numpy documentation).
 small_dataset = np.loadtxt('datasets/small-test-dataset.txt')
 large_dataset = np.loadtxt('datasets/large-test-dataset.txt')
+titanic_dataset = np.loadtxt('datasets/titanic-clean.txt')
+dataset = None # Our data of choice: small or large.
+feature_subset = None # Our feature subset.
 
-# Our feature subsets of choice: [3, 5, 7] and [1, 15, 27] for small and large datasets, respectively.
-small_feature_subset = [3, 5, 7]
-large_feature_subset = [1, 15, 27]
+# Forward selection or backward elimination?
+print('Which feature selection algorithm would you like to use?')
+print('1. Forward Selection')
+print('2. Backward Elimination')
+choice = int(input('Enter your choice: '))
 
-# Our classifier - 1NN classifier.
-classifier = Classifier()
+# Small or large dataset?
+print('\nWhich dataset would you like to use?')
+print('1. Small Dataset')
+print('2. Large Dataset')
+print('3. Titanic Dataset')
+dataset_choice = int(input('Enter your choice: '))
 
-# Our validator for the small dataset.
-validator_small_dataset = Validator(small_feature_subset, classifier, small_dataset)
+if dataset_choice == 1:
+    dataset = small_dataset
+elif dataset_choice == 2:
+    dataset = large_dataset
+else:
+    dataset = titanic_dataset
 
-# Evaluating our classifier on the small dataset.
-print('Evaluating our classifier on the small dataset:')
-print('----------------------------------------------')
-accuracy_small_dataset = validator_small_dataset.evaluate()
-print(f'Accuracy on the small dataset: {accuracy_small_dataset*100:.2f}%\n')
+print(f'\nThis dataset has {dataset.shape[1] - 1} features and {dataset.shape[0]} samples.\n')
 
-# Our validator for the large dataset.
-validator_large_dataset = Validator(large_feature_subset, classifier, large_dataset)
-
-# Evaluating our classifier on the large dataset.
-print('Evaluating our classifier on the large dataset:')
-print('----------------------------------------------')
-accuracy_large_dataset = validator_large_dataset.evaluate()
-print(f'Accuracy on the large dataset: {accuracy_large_dataset*100:.2f}%\n')
+if choice == 1:
+    # Using forward selection on the dataset.
+    _, feature_subset = forward_selection(dataset.shape[1] - 1, dataset)
+else:
+    # Using backward elimination on the dataset.
+    _, feature_subset = backward_elimination(dataset.shape[1] - 1, dataset)
 
 
 

@@ -54,6 +54,6 @@ class Validator:
             total_time += end - start
             #print()
         # Computing our accuracy and returning it.
-        print(f'Total time taken for Leave-One-Out Validation: {total_time:.2f} seconds')
+        #print(f'Total time taken for Leave-One-Out Validation: {total_time:.2f} seconds')
         accuracy = correct_classifications / N
         return accuracy
