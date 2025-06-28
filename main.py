@@ -9,7 +9,6 @@ import matplotlib.pyplot as plt
 
 '''
 
-    Group: Aamir Khan - akhan197 - Session 1
     Datasets: Small, Large, Titanic
 
     Results (Best Feature Subset & Accuracy):
