@@ -90,7 +90,7 @@ You'll be prompted to select:
 
 ## My Details
 
-**Aamir Khan**  |  [LinkedIn](https://www.linkedin.com/in/aamir-khan-bb83b8235/)  |  [GitHub](https://github.com/Akhan521)  
+**Aamir Khan**  |  [LinkedIn](https://www.linkedin.com/in/aamir-khan-aak521/)  |  [GitHub](https://github.com/Akhan521)  
 
 ---
 _This project was a deep dive into understanding how feature selection works with simple models like 1-NN and how cross-validation influences evaluation. I believe it reinforced both the value and limitations of building models from scratch._
